@@ -1,0 +1,35 @@
+{% extends 'home/main.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-top: 50px;">
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-12">
+            <h1 class="text-center">Job Posting</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="display: flex;justify-content: center;">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_title">Project Title</label>
+                    <input type="text" class="form-control" id="id_title" name="title" placeholder="Enter title">
+                    <label for="id_abstract">Project Abstract</label>
+                    <textarea class="form-control" id="id_abstract" name="abstract" placeholder="Enter abstract"></textarea>
+                    <label for="id_description">Project Description</label>
+                    <textarea class="form-control" id="id_description" name="description" placeholder="Enter description"></textarea>
+                    <label for="id_skills">Skills Required</label>
+                    <input type="text" class="form-control" id="id_skills" name="skills" placeholder="Enter skills">
+                    <label for="id_image">Project Image</label>
+                    <input type="file" class="form-control" id="id_image" name="image" placeholder="Enter image">
+                    <label for="id_budget">Budget</label>
+                    <input type="number" class="form-control" id="id_budget" name="budget" placeholder="Enter budget">
+                    <div style="display: flex;justify-content: center;">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

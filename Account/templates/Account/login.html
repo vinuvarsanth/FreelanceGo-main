@@ -1,0 +1,68 @@
+{% extends 'home/main.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+  body{
+    background-image: url('{% static "images/bg-gif.gif" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 30px;
+    margin: auto;
+    margin-bottom: 5px;
+    }
+ 
+  .form-control {
+    position: relative;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .h3  {
+    text-align: center;
+  }
+
+</style>
+<h1 class="h3 mb-3 mt-5 font-weight-normal">Login</h1>
+<form class="form-signin" method="post" style="border-radius: 15px;border: 3px solid #000;background-color: whitesmoke;">{% csrf_token %}
+  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  {% for field in login_form %}
+      <p>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+  {% endfor %}
+  {% if login_form.non_field_errors %}
+    <div style="color: red">
+      <p>{{login_form.non_field_errors}}</p>
+    </div>
+  {% endif %}
+  <div style="display: flex;justify-content: center;">
+    <button class="btn btn-lg btn-block" style="width: 200px;background-color: #212529;color: #e8ce4d;" type="submit">Log in</button>
+  </div>
+</form>
+<div class="d-flex flex-column">
+  <a class="m-auto" href="{% url 'password_reset' %}" style="color: black;text-decoration: none;">Reset password</a>
+</div>
+{% endblock content %}

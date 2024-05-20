@@ -1,0 +1,64 @@
+{% extends 'home/main.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+  body{
+    background-image: url('{% static "images/bg-gif.gif" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .image-container{
+    max-width: 250px;
+    height: auto;
+  }
+  .icon-container:hover {
+    opacity: 0.3;
+    cursor: pointer;
+  }
+  .dropdown-toggle::after {
+    content: none;
+  }
+  .card{
+    border-radius: 12px;
+  }
+  .h3  {
+    text-align: center;
+    margin-top: 50px;
+  }
+</style>
+<h1 class="h3 mb-3 font-weight-normal">Account</h1>
+<div class="container-fluid">
+  <div class="d-flex justify-content-center align-items-center" style="flex-direction: column;">
+    <div class="card profile-card m-2" style="border-radius: 15px;border: 3px solid #000;background-color: whitesmoke;">
+      <div class="card-body">
+        <div class="d-flex flex-column justify-content-center p-4">
+          <div class="image-container mx-auto mb-4">
+            <img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="profile-image" id="id_profile_image" src="{{profile_image}}">
+          </div>
+          <b><p class="mt-4 mb-1 field-heading">Email</p></b>
+          {%  if is_self %}
+            <h6>{{email}}</h6>
+          {% else %}
+            {% if hide_email %}
+              <h6>**********</h6>
+            {% else %}
+              <h6>{{email}}</h6>
+            {% endif %}
+          {% endif %}
+          <b><p class="mt-4 mb-1 field-heading">Username</p></b>
+          <h6>{{username}}</h6>
+          <!-- If Auth user is viewing their own profile -->
+          {% if is_self %}
+          <div style="display: flex;justify-content: center;">
+            <a class="btn btn-lg btn-block mt-4" style="width: 200px;background-color: #212529;color: #e8ce4d;" href="{% url 'account:edit' user_id=id %}">Make Changes</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column">
+      <a class="m-auto" href="{% url 'password_change' %}" style="color: black;text-decoration: none;">Change password</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
